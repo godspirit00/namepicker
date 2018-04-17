@@ -1,0 +1,126 @@
+<!-- Please enter the title of the page in the line below. DO NOT MODIFY OR REMOVE THIS LINE. 标题区：请在下方区域输入页面的标题。仅限一行。请不要修改或删除本说明文字，不要修改或删除区域底部的分隔行，也不要将您的内容输入到本行以及区域底部的分隔行上。
+Name Picker
+-->
+
+
+<!-- Please enter the names below. One name at a line. DO NOT MODIFY OR REMOVE THIS LINE. 名单区：请在下方区域输入名单，一行一个名字。请不要留空行，不要修改或删除本说明文字，不要修改或删除区域底部的分隔行，也不要将您的内容输入到本行以及区域底部的分隔行上。
+Tony
+Ling
+Ming
+Jessie
+Jack
+Tom
+Lucy
+Desmond
+Jessemine
+Shawn
+Rebecca
+George
+William
+Victor
+Kate
+Bill
+-->
+
+
+<html>
+<meta name="page-topic" content="Name Picker"><meta name="author" content="godspirit00" >
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312" />
+<head>
+<script type="text/javascript">
+var outcast = [];
+
+var txt_start = "Start";
+var txt_stop = "Stop";
+
+
+var t = null;
+var r;
+var a2;
+var oa2;
+var x = document.childNodes;
+
+var a1 = x[0].nodeValue.split("\n");
+
+function pa2(){
+	a2 = x[1].nodeValue.split("\n");
+	for (var i = 0; i < a2.length; i++) {
+		if (a2[i].length < 2) a2.splice(i, 1);
+	}
+	a2.splice(0, 1);
+	oa2 = a2.length;	
+}
+
+pa2();
+
+
+var ocn = [];
+for (var oc in outcast) {
+	if (outcast[oc] <= oa2) {
+		ocn.push(a2[outcast[oc]]);
+	}
+}
+
+function p() {
+	var ocfound = false;
+	if (t == null) {
+		if (a2.length - ocn.length <= (oa2 - ocn.length) * 0.2) pa2();
+		document.getElementById("b").innerHTML = txt_stop;
+		t = setTimeout("q()", 100);
+	} else {
+		document.getElementById("b").innerHTML = txt_start;
+		if (ocn.length > 0) {
+			for (var oc in ocn) {
+				if (ocn[oc] == a2[r]) {
+					q1();
+					ocfound = true;
+					break;
+				}
+			}
+			if (ocfound) {
+				p();
+			} else {
+				clearTimeout(t);
+				t = null;
+				a2.splice(r, 1);
+			}
+		} else {
+			clearTimeout(t);
+			t = null;
+			a2.splice(r, 1);
+		}
+	}
+}
+
+function q() {
+	r = Math.floor(Math.random() * a2.length)
+	document.getElementById('n').innerHTML = a2[r];
+	t = setTimeout("q()", 100);
+}
+
+function q1() {
+	r = Math.floor(Math.random() * a2.length)
+	document.getElementById('n').innerHTML = a2[r];
+}
+</script>
+<title> </title>
+</head>
+<body>
+<center>
+<br />
+<h1 id="t"> </h1>
+<br />
+<p id="n" style="font-weight:bold; font-size:200px;">-</p>
+<br />
+<p id="z"><!--[if lte IE 6]>请降低浏览器安全设置来启用功能。或者如果有，<![endif]--><!--[if (gte IE 7)&(lt IE 9)]>请点击窗口上方的黄/蓝色闪动提示条，并点击“允许阻止的内容”来启用功能。如果未找到，则<![endif]-->请点击窗口底部的“允许阻止的内容”按钮来启用功能。</p>
+<br />
+<br /><br /><br />
+<footer><font size="-5" color="#BFBFBF">Name Picker Version 1.5 by Tony Yan</font></footer>
+</center>
+<script type="text/javascript">
+document.title = a1[1];
+document.getElementById("t").innerHTML = a1[1];
+document.getElementById("z").innerHTML = "<button id='b' style='font-size:100px;' onClick='p();'>" + txt_start + "</button>";
+</script>
+</body>
+</html>
